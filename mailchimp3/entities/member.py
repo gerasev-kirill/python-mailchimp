@@ -23,6 +23,8 @@ class Member(BaseApi):
                 ret = merge_two_dicts(ret, self._mc_client._get(url=self._build_path(list_id, 'members'), 
                         offset=int(offset*100), count=100, **kwargs))
             return ret
+        elif get_all and total <= 100:
+            return self._mc_client._get(url=self._build_path(list_id, 'members'), count=total, **kwargs)
         else:
             return self._mc_client._get(url=self._build_path(list_id, 'members'), **kwargs)
 
